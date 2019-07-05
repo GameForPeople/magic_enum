@@ -149,7 +149,7 @@ template <typename E>
   constexpr auto names = strings_impl<E>(range_impl<E>());
 
   if (int i = value - min_impl<E>(); i >= 0 && static_cast<std::size_t>(i) < names.size()) {
-    return names[i];
+    return names[static_cast<std::size_t>(i)];
   } else {
     return {}; // Value out of range.
   }
@@ -158,14 +158,14 @@ template <typename E>
 template <typename E, int... I>
 [[nodiscard]] constexpr auto values_impl(std::integer_sequence<int, I...>) noexcept {
   static_assert(std::is_enum_v<E>, "magic_enum::detail::values_impl requires enum type.");
-  constexpr int n = sizeof...(I);
+  constexpr std::size_t n = sizeof...(I);
   constexpr std::array<bool, n> valid{{!name_impl<E, static_cast<E>(I + min_impl<E>())>().empty()...}};
-  constexpr int num_valid = ((valid[I] ? 1 : 0) + ...);
+  constexpr std::size_t num_valid = ((valid[I] ? 1 : 0) + ...);
 
   std::array<E, num_valid> values{};
-  for (int i = 0, v = 0; i < n && v < num_valid; ++i) {
+  for (std::size_t i = 0, v = 0; i < n && v < num_valid; ++i) {
     if (valid[i]) {
-      values[v++] = static_cast<E>(i + min_impl<E>());
+      values[v++] = static_cast<E>(static_cast<int>(i) + min_impl<E>());
     }
   }
 
