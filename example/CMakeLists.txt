@@ -24,8 +24,8 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clan
                 -fstack-protector-strong
                 -fPIC
                 -pipe
-                -fsanitize=address
-                -fsanitize=undefined
+                #-fsanitize=address
+                #-fsanitize=undefined
                 -g
                 -fdiagnostics-color=always
                 -fno-omit-frame-pointer
