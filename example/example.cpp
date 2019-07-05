@@ -28,8 +28,8 @@ enum Color { RED = -10, BLUE = 0, GREEN = 10 };
 
 int main() {
   // Enum variable to string name.
-  Color c1 = Color::RED;
-  auto c1_name = magic_enum::enum_name(c1);
+  constexpr Color c1 = Color::RED;
+  constexpr auto c1_name = magic_enum::enum_name(c1);
   std::cout << c1_name << std::endl; // RED
 
   // String enum name sequence.
@@ -42,20 +42,20 @@ int main() {
   // Color names: RED BLUE GREEN
 
   // String name to enum value.
-  auto c2 = magic_enum::enum_cast<Color>("BLUE");
-  if (c2.has_value() && c2.value() == Color::BLUE) {
+  constexpr auto c2 = magic_enum::enum_cast<Color>("BLUE");
+  if constexpr (c2.has_value() && c2.value() == Color::BLUE) {
     std::cout << "BLUE = " << c2.value() << std::endl; // BLUE = 0
   }
 
   // Integer value to enum value.
-  auto c3 = magic_enum::enum_cast<Color>(10);
-  if (c3.has_value() && c3.value() == Color::GREEN) {
+  constexpr auto c3 = magic_enum::enum_cast<Color>(10);
+  if constexpr (c3.has_value() && c3.value() == Color::GREEN) {
     std::cout << "GREEN = " << c3.value() << std::endl; // GREEN = 10
   }
 
   // Enum value to integer value.
-  auto color_integer = magic_enum::enum_integer(Color::RED);
-  if (color_integer == static_cast<std::underlying_type_t<Color>>(Color::RED)) {
+  constexpr auto color_integer = magic_enum::enum_integer(Color::RED);
+  if constexpr (color_integer == static_cast<std::underlying_type_t<Color>>(Color::RED)) {
     std::cout << "RED = " << color_integer << std::endl; // RED = -10
   }
 

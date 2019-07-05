@@ -7,7 +7,29 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clan
     endif()
 
     set(CMAKE_VERBOSE_MAKEFILE ON)
-    set(OPTIONS -Wall -Wextra -pedantic-errors -Werror -std=c++17)
+    set(OPTIONS -std=c++17
+                -Wall
+                -Wextra
+                -Werror
+                -Wnon-virtual-dtor
+                -Wold-style-cast
+                -Woverloaded-virtual
+                -Wsign-conversion
+                -Wconversion
+                -Wnull-dereference
+                -Wformat=2
+                -Wdouble-promotion
+                -fasynchronous-unwind-tables
+                -fstack-protector
+                -fstack-protector-strong
+                -fPIC
+                -pipe
+                -fsanitize=address
+                -fsanitize=undefined
+                -g
+                -fdiagnostics-color=always
+                -fno-omit-frame-pointer
+                -pedantic-errors)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     check_cxx_compiler_flag(/std:c++17 HAS_CPP17_FLAG)
     if(!HAS_CPP17_FLAG)
